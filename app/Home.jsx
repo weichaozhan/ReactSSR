@@ -1,18 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
-const Home = () => {
+import { getHomeList } from '../actions/index';
+
+const Home = (props) => {
+  const { list, name } = props;
+
   const handleClick = () => {
-    console.log(handleClick);
+    props.getHomeList();
   };
+
+  
+  useEffect(() => {
+    props.getHomeList();
+  }, []);
 
   return (
     <div>
-      <div>It's Home</div>
+      <div>It's Home {name}</div>
       <button onClick={handleClick}>
         test
       </button>
+      <ul>
+        {list.map((item, index) => (
+          <li key={index}>
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 };
 
-export default Home;
+const mapStateToProp = state => ({
+  list: state.home.list,
+  name: state.home.name,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getHomeList: () => {
+    dispatch(getHomeList());
+  },
+});
+
+export default connect(mapStateToProp, mapDispatchToProps)(Home);
