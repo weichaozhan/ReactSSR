@@ -8,7 +8,7 @@ import Routes from '../app/Routes.jsx';
 import store from '../store/index.js';
 
 const App = () => (
-  <Provider store={store} >
+  <Provider store={store()} >
     <BrowserRouter>
       {Routes}
     </BrowserRouter>

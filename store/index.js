@@ -7,6 +7,4 @@ const reducer = combineReducers({
   home: homeReducer,
 });
 
-const store = createStore(reducer, compose(applyMiddleware(thunk)));
-
-export default store;
+export default () => createStore(reducer, compose(applyMiddleware(thunk)));

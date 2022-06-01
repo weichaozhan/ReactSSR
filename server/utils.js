@@ -5,12 +5,13 @@ import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
 
 import Routes from '../app/Routes.jsx';
-import store from '../store/index.js';
+import createStore from '../store/index.js';
 import { routes } from '../app/Routes.jsx';
 
 export const render = (req) => {
   // 调用 matchRoutes 用来匹配当前路由
   try {
+    const store = createStore();
     const matchedRoutes = matchRoutes(routes, req.path);
     
     const promises = [];
