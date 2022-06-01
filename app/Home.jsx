@@ -32,6 +32,10 @@ const Home = (props) => {
   )
 };
 
+Home.loadData = (store) => {
+  return store.dispatch(getHomeList());
+}
+
 const mapStateToProp = state => ({
   list: state.home.list,
   name: state.home.name,

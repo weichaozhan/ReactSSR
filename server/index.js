@@ -7,10 +7,12 @@ const app = express();
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-
-  res.send(
-    render(req)
-  );
+  render(req)
+    .then(result => {
+      res.send(
+        result
+      );
+    });
 });
 
 app.listen(3001, () => {

@@ -5,12 +5,29 @@ import Nav from './Nav.jsx';
 import Home from './Home.jsx';
 import Test from './Test.jsx';
 
+export const routes = [
+  {
+    path: "/",
+    element: <Home/>,
+    exact: true,
+    loadData: Home.loadData,// 服务端获取异步数据的函数
+    key: 'home'
+  },
+  {
+    path: '/test',
+    element: <Test/>,
+    exact: true,
+    key: 'login'
+  }
+];
+
 export default (
   <div>
     <Nav />
     <Routes>
-      <Route path='/' exact element={<Home/>}></Route>
-      <Route path='/test' exact element={<Test/>}></Route>
+      {routes.map(item => (
+        <Route {...item}></Route>
+      ))}
     </Routes>
   </div>
 )
