@@ -1,18 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import StaticContxt from '../context/staticContxt';
 import { getHomeList } from '../actions/index';
+
+import styles from './Home.css';
 
 const Home = (props) => {
   const { list, name } = props;
+  const staticContxt = useContext(StaticContxt);
 
   const handleClick = () => {
     props.getHomeList();
   };
-
   
+  
+  // 判断是否为服务端渲染环境
+  if (staticContxt.insertCss) {
+    staticContxt.insertCss(styles);
+  }
   useEffect(() => {
-    props.getHomeList();
+    if (!list.length) {
+      props.getHomeList();
+    }
   }, []);
 
   return (
@@ -23,7 +33,7 @@ const Home = (props) => {
       </button>
       <ul>
         {list.map((item, index) => (
-          <li key={index}>
+          <li key={index} className={styles['list-item']}>
             {item}
           </li>
         ))}
